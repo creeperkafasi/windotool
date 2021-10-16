@@ -1,0 +1,45 @@
+Name "windotool"
+
+OutFile "windotoolInstall.exe"
+
+RequestExecutionLevel admin
+
+Unicode True
+
+InstallDir "C:\Program Files (x86)\windotool\"
+
+InstallDirRegKey HKLM "Software\windotool" "Install_Dir"
+
+Page directory
+Page instfiles
+
+UninstPage uninstConfirm
+UninstPage instfiles
+
+Section "windotool (required)"
+    SectionIn RO
+    
+    SetOutPath $INSTDIR
+    
+    File /r "bin\Debug\net5.0\win-x64\publish\*"
+    
+    WriteRegStr HKLM SOFTWARE\windotool "Install_Dir" "$INSTDIR"
+      
+    ; Write the uninstall keys for Windows
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\windotool" "DisplayName" "windotool"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\windotool" "UninstallString" '"$INSTDIR\uninstall.exe"'
+    WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\windotool" "NoModify" 1
+    WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\windotool" "NoRepair" 1
+    WriteUninstaller "$INSTDIR\uninstall.exe"
+
+SectionEnd
+
+Section "Uninstall"
+  
+  ; Remove registry keys
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Example2"
+  DeleteRegKey HKLM SOFTWARE\NSIS_Example2
+
+  RMDir /r "$INSTDIR"
+
+SectionEnd
