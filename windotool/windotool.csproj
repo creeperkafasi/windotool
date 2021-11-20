@@ -5,6 +5,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <PublishSingleFile>true</PublishSingleFile>
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -15,6 +16,7 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Win32.Registry" Version="6.0.0-preview.5.21301.5" />
       <PackageReference Include="PInvoke.User32" Version="0.7.104" />
+      <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
     </ItemGroup>
 
     <ItemGroup>
