@@ -26,11 +26,11 @@ namespace windotool
             {
                 dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_LEFTDOWN,
             },
-            ["2"] = new()
+            ["3"] = new()
             {
                 dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_RIGHTDOWN,
             },
-            ["3"] = new()
+            ["2"] = new()
             {
                 dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_MIDDLEDOWN
             },
@@ -43,7 +43,27 @@ namespace windotool
             {
                 dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_WHEEL,
                 mouseData = UInt32.MaxValue - User32.WHEEL_DELTA,
-            }
+            },
+            ["6"] = new()
+            {
+                dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_HWHEEL,
+                mouseData = User32.WHEEL_DELTA,
+            },
+            ["7"] = new()
+            {
+                dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_HWHEEL,
+                mouseData = UInt32.MaxValue - User32.WHEEL_DELTA,
+            },
+            ["8"] = new()
+            {
+                dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_XDOWN,
+                mouseData = 1,
+            },
+            ["9"] = new()
+            {
+                dwFlags = User32.MOUSEEVENTF.MOUSEEVENTF_XDOWN,
+                mouseData = 2,
+            },
         };
     }
 }

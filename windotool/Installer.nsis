@@ -21,7 +21,7 @@ Section "windotool (required)"
     
     SetOutPath $INSTDIR
     
-    File /r "bin\Debug\net5.0\win-x64\publish\*"
+    File /r "bin\Debug\net5.0\win-x64\*"
     
     WriteRegStr HKLM SOFTWARE\windotool "Install_Dir" "$INSTDIR"
       

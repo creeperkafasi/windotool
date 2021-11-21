@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <SelfContained>true</SelfContained>
+        <SelfContained>false</SelfContained>
         <PublishTrimmed>true</PublishTrimmed>
     </PropertyGroup>
 

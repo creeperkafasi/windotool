@@ -49,7 +49,7 @@ namespace windotool
             User32.SendInput(1, inputs, Marshal.SizeOf(typeof(User32.INPUT)));
         }
 
-        public static void MouseButton(string btn, bool isDown)
+        public static void MouseButton(string btn, bool isUp)
         {
             var inputs = new[]
             {
@@ -63,7 +63,7 @@ namespace windotool
                 }
             };
             inputs[0].Inputs.mi.dwFlags =
-                (User32.MOUSEEVENTF) (((UInt32) (inputs[0].Inputs.mi.dwFlags)) << (isDown ? 1 : 0));
+                (User32.MOUSEEVENTF) (((UInt32) (inputs[0].Inputs.mi.dwFlags)) << (isUp ? 1 : 0));
             User32.SendInput(1, inputs, Marshal.SizeOf(typeof(User32.INPUT)));
         }
     }

@@ -70,6 +70,7 @@ namespace windotool
                     },
                     ["mousemove"] = () =>
                     {
+                        if (args[i + 1] == "--") i++;
                         Functions.MouseMove(
                             Convert.ToInt32((float) Convert.ToInt32(args[i + 1]) / screenSize[0] * 65535),
                             Convert.ToInt32((float) Convert.ToInt32(args[i + 2]) / screenSize[1] * 65535),
@@ -79,6 +80,7 @@ namespace windotool
                     },
                     ["mousemove_relative"] = () =>
                     {
+                        if (args[i + 1] == "--") i++;
                         Functions.MouseMove(
                             Convert.ToInt32(args[i + 1]),
                             Convert.ToInt32(args[i + 2]),
@@ -98,7 +100,8 @@ namespace windotool
                         Functions.MouseButton(args[i + 1], false);
                         i++;
                         return 0;
-                    },["mouseup"] = () =>
+                    },
+                    ["mouseup"] = () =>
                     {
                         Functions.MouseButton(args[i + 1], true);
                         i++;
