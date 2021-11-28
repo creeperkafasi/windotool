@@ -81,8 +81,8 @@ namespace windotool
                             }
                         }
 
-                        double x = Convert.ToInt32(args[i + 1]);
-                        double y = Convert.ToInt32(args[i + 2]);
+                        double x = Double.Parse(args[i + 1], System.Globalization.CultureInfo.InvariantCulture);
+                        double y = Double.Parse(args[i + 2], System.Globalization.CultureInfo.InvariantCulture);
 
                         if (usePolarCoords)
                         {
@@ -122,8 +122,8 @@ namespace windotool
                             }
                         }
 
-                        double x = Convert.ToInt32(args[i + 1]);
-                        double y = Convert.ToInt32(args[i + 2]);
+                        double x = Double.Parse(args[i + 1], System.Globalization.CultureInfo.InvariantCulture);
+                        double y = Double.Parse(args[i + 2], System.Globalization.CultureInfo.InvariantCulture);
 
                         if (usePolarCoords)
                         {
