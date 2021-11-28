@@ -16,7 +16,7 @@ namespace windotool
             if (Data.ControlKeys.Keys.Contains(key.ToLower()))
             {
                 inputs[0].type = User32.InputType.INPUT_KEYBOARD;
-                inputs[0].Inputs.ki.wVk = Data.ControlKeys[key];
+                inputs[0].Inputs.ki.wVk = Data.ControlKeys[key.ToLower()];
                 User32.SendInput(1, inputs, Marshal.SizeOf(typeof(User32.INPUT)));
             }
             else

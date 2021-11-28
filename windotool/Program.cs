@@ -70,20 +70,78 @@ namespace windotool
                     },
                     ["mousemove"] = () =>
                     {
-                        if (args[i + 1] == "--") i++;
+                        bool usePolarCoords = false;
+
+                        while (args[i + 1].StartsWith("--"))
+                        {
+                            switch (args[i + 1])
+                            {
+                                case "--":
+                                    i++;
+                                    break;
+                                case "--polar":
+                                    usePolarCoords = true;
+                                    i++;
+                                    break;
+                            }
+                        }
+
+                        double x = Convert.ToInt32(args[i + 1]);
+                        double y = Convert.ToInt32(args[i + 2]);
+
+                        if (usePolarCoords)
+                        {
+                            double radians = ((360 - x) + 90) * Math.PI / 180;
+                            double distance = y;
+                            
+                            int originX = screenSize[0] / 2;
+                            int originY = screenSize[1] / 2;
+                            
+                            x = originX + (Math.Cos(radians) * y);
+                            y = originY + (-Math.Sin(radians) * y);
+                        }
+
                         Functions.MouseMove(
-                            Convert.ToInt32((float) Convert.ToInt32(args[i + 1]) / screenSize[0] * 65535),
-                            Convert.ToInt32((float) Convert.ToInt32(args[i + 2]) / screenSize[1] * 65535),
+                            Convert.ToInt32(x / screenSize[0] * 65535),
+                            Convert.ToInt32(y / screenSize[1] * 65535),
                             false);
+
                         i += 2;
                         return 0;
                     },
                     ["mousemove_relative"] = () =>
                     {
-                        if (args[i + 1] == "--") i++;
+                        bool usePolarCoords = false;
+
+                        while (args[i + 1].StartsWith("--"))
+                        {
+                            switch (args[i + 1])
+                            {
+                                case "--":
+                                    i++;
+                                    break;
+                                case "--polar":
+                                    usePolarCoords = true;
+                                    i++;
+                                    break;
+                            }
+                        }
+
+                        double x = Convert.ToInt32(args[i + 1]);
+                        double y = Convert.ToInt32(args[i + 2]);
+
+                        if (usePolarCoords)
+                        {
+                            double radians = ((360 - x) + 90) * Math.PI / 180;
+                            double distance = y;
+                            
+                            x = (Math.Cos(radians) * y);
+                            y = (-Math.Sin(radians) * y);
+                        }
+
                         Functions.MouseMove(
-                            Convert.ToInt32(args[i + 1]),
-                            Convert.ToInt32(args[i + 2]),
+                            Convert.ToInt32(x),
+                            Convert.ToInt32(y),
                             true);
                         i += 2;
                         return 0;
