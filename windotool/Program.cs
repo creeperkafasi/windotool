@@ -21,11 +21,6 @@ namespace windotool
 
             List<string> args = Environment.GetCommandLineArgs().ToList();
 
-            foreach (var el in args)
-            {
-                Console.WriteLine(el);
-            }
-
             for (int i = 0; i < args.Count; i++)
             {
                 var commands = new Dictionary<string, Func<int>>()
@@ -72,7 +67,7 @@ namespace windotool
                     {
                         bool usePolarCoords = false;
 
-                        while (args[i + 1].StartsWith("--"))
+                        while (args.Count - 1 > i && args[i + 1].StartsWith("--"))
                         {
                             switch (args[i + 1])
                             {
@@ -93,10 +88,10 @@ namespace windotool
                         {
                             double radians = ((360 - x) + 90) * Math.PI / 180;
                             double distance = y;
-                            
+
                             int originX = screenSize[0] / 2;
                             int originY = screenSize[1] / 2;
-                            
+
                             x = originX + (Math.Cos(radians) * y);
                             y = originY + (-Math.Sin(radians) * y);
                         }
@@ -113,7 +108,7 @@ namespace windotool
                     {
                         bool usePolarCoords = false;
 
-                        while (args[i + 1].StartsWith("--"))
+                        while (args.Count - 1 > i && args[i + 1].StartsWith("--"))
                         {
                             switch (args[i + 1])
                             {
@@ -134,7 +129,7 @@ namespace windotool
                         {
                             double radians = ((360 - x) + 90) * Math.PI / 180;
                             double distance = y;
-                            
+
                             x = (Math.Cos(radians) * y);
                             y = (-Math.Sin(radians) * y);
                         }
@@ -164,7 +159,38 @@ namespace windotool
                         Functions.MouseButton(args[i + 1], true);
                         i++;
                         return 0;
-                    }
+                    },
+                    ["getmouselocation"] = () =>
+                    {
+                        while (args.Count - 1 > i && args[i + 1].StartsWith("--"))
+                        {
+                            switch (args[i + 1])
+                            {
+                                case "--":
+                                    i++;
+                                    break;
+                                case "--shell":
+                                    Console.WriteLine(
+                                        "X={0}\nY={1}\nSCREEN={2}\nWINDOW={3}",
+                                        User32.GetCursorPos().x,
+                                        User32.GetCursorPos().y,
+                                        0, // idk how to get the screen id in win32api... 
+                                        User32.GetForegroundWindow()
+                                    );
+                                    i++;
+                                    return 0;
+                            }
+                        }
+
+                        Console.WriteLine(
+                            "x:{0} y:{1} screen:{2} window:{3}",
+                            User32.GetCursorPos().x,
+                            User32.GetCursorPos().y,
+                            0, // idk how to get the screen id in win32api... 
+                            User32.GetForegroundWindow()
+                        );
+                        return 0;
+                    },
                 };
 
                 if (commands.ContainsKey(args[i])) commands[args[i]].Invoke();
